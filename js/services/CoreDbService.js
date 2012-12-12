@@ -14,7 +14,7 @@ function CoreDbService($http, rootQueryUrl, debugging) {
      * parameter.
      */
     getDataRows: function (sql, onSuccess, onError) {
-  
+
       if (debugging) { console.log('GET: ' + sql); }
       $http.get(rootQueryUrl + sql).
       

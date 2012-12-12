@@ -19,3 +19,4 @@ angular.module('app.services', ['app.config'], function($provide) {
 angular.module('app', ['app.config', 'app.services']).run(function(mapService){
   mapService.init();
 });
+

@@ -1,12 +1,20 @@
+/**
+ * NeighborhoodService is the provider of data on the neighborhood
+ * level (opposed to individual tree level). 
+ */
 function NeighborhoodService(coreDbService, debugging) {
   
   // Query templates.
-  var nbrhdSql = 'SELECT cartodb_id as id, name, coalit FROM neighborhoods_pdx ORDER BY name';
+  
+  // Query for the list of neighborhood names.
+  var nbrhdSql = 'SELECT cartodb_id as id, initcap(name) as name, coalit FROM neighborhoods_pdx ORDER BY name';
 
+  // Query for getting the bounds of a given neighborhood.
   var boundsSql = 'SELECT ST_XMin(ST_Extent(the_geom)) as xmin, ST_YMin(ST_Extent(the_geom)) as ymin, ' +
                   'ST_XMax(ST_Extent(the_geom)) as xmax, ST_YMax(ST_Extent(the_geom)) as ymax  ' +
                   'FROM neighborhoods_pdx WHERE cartodb_id=';
 
+  // Query for aggregated tree stats for a given neighborhood.
   var nbrhdTreeStatsSql = '' + 
                 'SELECT ' +
                   'COUNT(*) as num_trees, ' +

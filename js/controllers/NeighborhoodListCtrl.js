@@ -1,13 +1,16 @@
-//
-// neighborhoodListCtrl
-//
+/**
+ * neighborhoodListCtrl
+ */
 function neighborhoodListCtrl($scope, neighborhoodService, mapService) {
 
   $scope.neighborhoods = [];
  
+  /**
+   * To be triggered when a neighborhood has been selected in the UI.
+   */
   $scope.selectNeighborhood = function(neighborhood) {
 
-    // Indicate that selection has changed in the neighborhood list.
+    // Indicate that the selection has changed in the neighborhood list.
     angular.forEach($scope.neighborhoods, function(nbrhd) {
       nbrhd.selected = nbrhd.id === neighborhood.id ? true : false;
     });
@@ -28,9 +31,9 @@ function neighborhoodListCtrl($scope, neighborhoodService, mapService) {
     }
     
     neighborhoodService.getNeighborhoodTreeStats(neighborhood.id, function(stats) {
-    
+      // todo: display stats in the UI.
     }, function(errorMesssage) {
-    
+
     });
     
   };

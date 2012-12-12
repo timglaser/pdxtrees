@@ -19,8 +19,6 @@ function MapService() {
       table_name: 'neighborhoods_pdx',
       query: "SELECT * FROM {{table_name}}",
       map_style: true,
-      infowindow: "SELECT cartodb_id, the_geom_webmercator FROM {{table_name}} WHERE cartodb_id={{feature}}",
-      auto_bound: false,
       debug: false
     });
   }
@@ -38,8 +36,8 @@ function MapService() {
       table_name: 'heritage_trees_pdx',
       query: getTreesQuery(neighborhoodId),
       map_style: true,
-      debug: true
-    });
+      debug: false
+    }); 
   }
 
   function getTreesQuery(neighborhoodId) { 
