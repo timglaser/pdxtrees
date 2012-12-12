@@ -1,0 +1,7 @@
+html, body { height: 100%; margin: 0; padding: 0; }
+
+#neighborhood_list { width: 30%; height: 100%; float: left; background-color: white; overflow-y: scroll; }
+
+#map_canvas { width: 70%; height: 100%; float: left; }
+
+#neighborhood_list .selected-true { background-color: blue; color: white; }

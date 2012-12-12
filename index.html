@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title>Heritage Trees of Portland, Oregon</title>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="libs/cartodb-gmaps/css/cartodb-gmapsv3.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+  </head>
+  <body>
+  
+    <div id="neighborhood_list" ng-controller="neighborhoodListCtrl">
+      <ul>
+          <li ng-cloak ng-repeat="neighborhood in neighborhoods">
+            <span class="selected-{{neighborhood.selected}}" ng-click="selectNeighborhood(neighborhood)">{{neighborhood.name}}</span>
+          </li>
+      </ul>
+    </div>
+  
+    <div id="map_canvas"></div>
+
+    <!-- libs -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="libs/wax/js/wax.g.js"></script>
+    <script type="text/javascript" src="libs/cartodb-gmaps/js/cartodb-gmapsv3.js"></script>
+    <!-- services -->
+    <script type="text/javascript" src="js/services/CoreDbService.js"></script>
+    <script type="text/javascript" src="js/services/NeighborhoodService.js"></script>
+    <script type="text/javascript" src="js/services/MapService.js"></script>
+    <!-- controllers -->
+    <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js"></script>
+    <!-- app -->
+    <script type="text/javascript" src="js/app.js"></script>
+    
+  </body>
+</html>
