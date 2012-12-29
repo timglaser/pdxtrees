@@ -1,7 +1,38 @@
 html, body { height: 100%; margin: 0; padding: 0; }
 
-#neighborhood_list { width: 30%; height: 100%; float: left; background-color: white; overflow-y: scroll; }
+#top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: red;
+}
 
-#map_canvas { width: 70%; height: 100%; float: left; }
+#main-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 50px;
+}
 
-#neighborhood_list .selected-true { background-color: blue; color: white; }
+#neighborhood-list { 
+  width: 30%; 
+  height: 100%; 
+  float: left; 
+  background-color: white; 
+  overflow-y: scroll; 
+}
+
+#map_canvas { 
+  width: 70%; 
+  height: 100%; 
+  float: left; 
+}
+
+#neighborhood-list .selected-true { 
+  background-color: blue; 
+  color: white; 
+}

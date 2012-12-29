@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Heritage Trees of Portland, Oregon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Learn about the heritage trees in your neighborhood of Portland, Oregon.">
+    <meta name="author" content="Tim Glaser - https://github.com/timglaser">
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+
+      /**
+       * Top Bar
+       */
+      #top-bar {
+        height:60px;
+        width: 100%;
+        background-color: #fff; /*#fede98;*/
+        
+        -webkit-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, .2);
+        box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, .2);
+        /* border-bottom: 1px solid #eee; */
+        
+        position:absolute;
+        top:0;
+        left: 0;
+        right:0;
+        z-index: 100;
+      }
+      
+      #branding-logo {
+        float: left;
+        padding-top: 4px;
+        padding-left: 12px;
+        padding-right: 16px;
+      }
+      
+      #branding-name {
+        float: left;
+      }
+      
+      #btn-info {
+        float: right;
+        padding-top: 16px;
+        padding-right: 20px;
+        opacity: 0.7;
+      }
+      
+      #btn-info:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+            
+            
+      #main-container {
+        width: 100%;
+
+        position: absolute;
+        top: 60px;
+        bottom: 0;
+        z-index: 1;
+      }
+
+
+      /** 
+       * Neighborhood List 
+       */
+      #neighborhood-list {
+        height:100%;
+        background-color: #fff;
+        position: relative;
+        overflow-y: hidden;
+      }
+      
+      #neighborhood-list .form-search {
+        height: 54px;
+        margin-bottom: 0;
+        position: relative;
+        background-color: #000; /*#fede98;*/
+      }
+      #neighborhood-list .form-search .search-query {
+        width: auto;
+        padding-left: 24px;
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        z-index: 1;
+      }
+      #neighborhood-list .form-search .icon-search {
+        position: absolute;
+        top:18px;
+        left:18px;
+        z-index: 2;
+        opacity: 0.7;
+      }
+      
+      #neighborhood-list .form-search .icon-remove-sign {
+        position: absolute;
+        top:18px;
+        right:18px;
+        z-index: 2;
+        opacity: 0.7;
+      }
+
+      #neighborhood-list .list-wrapper {
+        position: absolute;
+        top: 54px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow-y: scroll;
+      }      
+
+      #neighborhood-list li {
+        padding-top: 9px;
+        padding-bottom: 9px;
+        padding-left: 9px;
+        
+        background-color: #fff;
+
+        border-bottom: 1px solid #f3f3f3;
+      }
+
+      #neighborhood-list li:first-child {
+        border-top: 1px solid #efefef;
+      }
+
+
+      /**
+       * Map
+       */
+      #map_canvas {
+        height:100%;
+        background-color:#ddd;
+      }
+      
+      /* I'm not sure why bootstrap specifies a 20px side padding for widths under 
+         767px but it causes awkwardness in this layout so I'm overriding it */
+      @media (max-width: 767px) {
+        body {
+          padding-right: 0px;
+          padding-left: 0px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div id="top-bar" class="row-fluid">
+        <img id="branding-logo" src="img/tree.svg"/>
+        <h3 id="branding-name">Heritage Trees</h3>
+        <img id="btn-info" src="img/info.svg"></img>
+          <!-- <a href="#" class="btn btn-mini" type="button" onclick="$('#neighborhood-list').toggle();">Hide Sidebar</a> -->
+      </div>
+  
+      <div id="main-container" class="row-fluid">
+        <div id="neighborhood-list" class="span3">
+          
+          <form class="form-search">
+            <input type="text" class="search-query" placeholder="Search Neighborhoods" />
+            <i class="icon-search" alt="Search"></i>
+            <i class="icon-remove-sign" alt="Clear Search"></i>
+          </form>
+
+          <div class="list-wrapper">
+            <ul class="unstyled">
+              <li class="selected-false">Alameda                           </li>
+              <li class="selected-false">Alameda/Beaumont-Wilshire         </li>
+              <li class="selected-false">Alameda/Irvington                 </li>
+              <li class="selected-false">Arbor Lodge                       </li>
+              <li class="selected-false">Ardenwald-Johnson Creek           </li>
+              <li class="selected-false">Ardenwald-Johnson Creek           </li>
+              <li class="selected-false">Ardenwald-Johnson Creek/Woodstock </li>
+              <li class="selected-false">Argay                             </li>
+              <li class="selected-false">Argay/Wilkes                      </li>
+              <li class="selected-false">Arlington Heights                 </li>
+              <li class="selected-false">Arlington Heights/Sylvan-Highlands</li>
+              <li class="selected-false">Arnold Creek                      </li>
+              <li class="selected-false">Ashcreek                          </li>
+              <li class="selected-false">Ashcreek/Crestwood                </li>
+              <li class="selected-false">Ashcreek/Crestwood                </li>
+              <li class="selected-false">Beaumont-Wilshire                 </li>
+              <li class="selected-false">Boise                             </li>
+              <li class="selected-false">Boise/Eliot                       </li>
+              <li class="selected-false">Brentwood-Darlington              </li>
+              <li class="selected-false">Bridgeton                         </li>
+              <li class="selected-false">Overlook</li>
+            </ul>
+          </div>
+                  
+        </div>
+        <div id="map_canvas" class="span9">
+        </div>
+      </div>
+    </div>      
+    <!-- libs -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
