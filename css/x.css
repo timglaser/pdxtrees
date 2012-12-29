@@ -1,0 +1,134 @@
+/**
+ * Top Bar
+ */
+#top-bar {
+  height:60px;
+  width: 100%;
+  background-color: #fff; /*#fede98;*/
+  
+  -webkit-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, .2);
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, .2);
+  /* border-bottom: 1px solid #eee; */
+  
+  position:absolute;
+  top:0;
+  left: 0;
+  right:0;
+  z-index: 100;
+}
+
+#branding-logo {
+  float: left;
+  padding-top: 4px;
+  padding-left: 12px;
+  padding-right: 16px;
+}
+
+#branding-name {
+  float: left;
+}
+
+#btn-info {
+  float: right;
+  padding-top: 16px;
+  padding-right: 20px;
+  opacity: 0.7;
+}
+
+#btn-info:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+      
+      
+#main-container {
+  width: 100%;
+
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  z-index: 1;
+}
+
+
+/** 
+ * Neighborhood List 
+ */
+#neighborhood-list {
+  height:100%;
+  background-color: #17181b;
+  position: relative;
+  overflow-y: hidden;
+}
+
+#neighborhood-list .form-search {
+  height: 54px;
+  margin-bottom: 0;
+  position: relative;
+  background-color: #303745; /*#fede98;*/
+}
+#neighborhood-list .form-search .search-query {
+  width: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 1;
+}
+#neighborhood-list .form-search .icon-search {
+  position: absolute;
+  top:18px;
+  left:18px;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+#neighborhood-list .form-search .icon-remove-sign {
+  position: absolute;
+  top:18px;
+  right:18px;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+#neighborhood-list .list-wrapper {
+  position: absolute;
+  top: 54px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+}      
+
+#neighborhood-list li {
+  color: #edeff2;
+  padding: 12px 9px;
+  background-color: #3f414b;
+  margin-top: 1px; 
+  border-top: 1px solid;
+  border-top-color: #4f515d;
+}
+
+#neighborhood-list li:last-child {
+  border-bottom: 1px solid #4f515d;
+}
+
+
+/**
+ * Map
+ */
+#map_canvas {
+  height:100%;
+  background-color:#ddd;
+}
+
+/* I'm not sure why bootstrap specifies a 20px side padding for widths under 
+   767px but it causes awkwardness in this layout so I'm overriding it */
+@media (max-width: 767px) {
+  body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
