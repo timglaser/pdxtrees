@@ -38,8 +38,7 @@
 #btn-info:hover {
   opacity: 1;
   cursor: pointer;
-}
-      
+}    
       
 #main-container {
   width: 100%;
@@ -93,7 +92,7 @@
   opacity: 0.7;
 }
 
-#neighborhood-list .list-wrapper {
+div.neighborhood-list-wrapper {
   position: absolute;
   top: 54px;
   bottom: 0;
@@ -102,17 +101,24 @@
   overflow-y: scroll;
 }      
 
-#neighborhood-list li {
+li.neighborhood {
   color: #edeff2;
   padding: 12px 9px;
   background-color: #3f414b;
   margin-top: 1px; 
   border-top: 1px solid;
   border-top-color: #4f515d;
+  cursor: pointer;
 }
 
-#neighborhood-list li:last-child {
+li.neighborhood:last-child {
   border-bottom: 1px solid #4f515d;
+}
+
+li.neighborhood:hover, 
+li.neighborhood:active  {
+  background-color: #17181b;
+  border-color: #17181b;
 }
 
 
