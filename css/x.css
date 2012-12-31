@@ -9,31 +9,30 @@
       
 #main-container {
   width: 100%;
-
   position: absolute;
   top: 42px;
   bottom: 0;
-  z-index: 1;
 }
 
-
-/** 
- * Neighborhood List 
- */
-#neighborhood-list {
+#sidebar {
   height:100%;
   background-color: #17181b;
   position: relative;
   overflow-y: hidden;
 }
 
-#neighborhood-list .form-search {
+#neighborhood-list-pane {
+  height:100%;
+}
+
+/* Neighborhood List Search  */
+#neighborhood-list-pane .form-search {
   height: 54px;
   margin-bottom: 0;
   position: relative;
-  background-color: #303745; /*#fede98;*/
+  background-color: #303745;
 }
-#neighborhood-list .form-search .search-query {
+#neighborhood-list-pane .form-search .search-query {
   width: auto;
   padding-left: 24px;
   padding-right: 24px;
@@ -43,30 +42,34 @@
   right: 12px;
   z-index: 1;
 }
-#neighborhood-list .form-search .icon-search {
+#neighborhood-list-pane .form-search .icon-search {
   position: absolute;
   top:18px;
   left:18px;
   z-index: 2;
   opacity: 0.7;
 }
-
-#neighborhood-list .form-search .icon-remove-sign {
+#neighborhood-list-pane .form-search .icon-remove-sign {
   position: absolute;
   top:18px;
   right:18px;
   z-index: 2;
   opacity: 0.7;
 }
+/* End Neighborhood List  */
 
-div.neighborhood-list-wrapper {
+.carousel-inner {
+  height: 100%;
+}
+
+div.neighborhood-list-pane-wrapper {
   position: absolute;
   top: 54px;
   bottom: 0;
   left: 0;
   right: 0;
   overflow-y: scroll;
-}      
+}
 
 li.neighborhood {
   color: #edeff2;
@@ -80,10 +83,12 @@ li.neighborhood {
 
 li.neighborhood:last-child {
   border-bottom: 1px solid #4f515d;
+  margin-bottom: 54px;
 }
 
 li.neighborhood:hover, 
-li.neighborhood:active  {
+li.neighborhood:active,
+li.neighborhood.active  {
   background-color: #17181b;
   border-color: #17181b;
 }
