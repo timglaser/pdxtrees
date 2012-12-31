@@ -13,6 +13,8 @@ function neighborhoodListCtrl($scope, neighborhoodService, mapService) {
     // Indicate that the selection has changed in the neighborhood list.
     angular.forEach($scope.neighborhoods, function(nbrhd) {
       nbrhd.selected = nbrhd.id === neighborhood.id ? true : false;
+      // Slide to details pane.
+      $('#sidebar.carousel').carousel('next');
     });
 
     // Zoom to the bounds of the selected neighborhood.

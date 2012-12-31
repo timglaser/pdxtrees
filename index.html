@@ -3,37 +3,58 @@
   <head>
     <meta charset="utf-8">
     <title>Heritage Trees of Portland, Oregon</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about the heritage trees in your neighborhood of Portland, Oregon.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Learn about the heritage trees of Portland, Oregon.">
     <meta name="author" content="Tim Glaser - https://github.com/timglaser">
-    
-    <!-- Bootstrap -->
+
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="libs/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <!-- CartoDB -->
     <link href="libs/cartodb-gmaps/css/cartodb-gmapsv3.css" rel="stylesheet" type="text/css">
-    <!-- App -->
     <link href="css/app.css" rel="stylesheet" type="text/css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
   </head>
   <body>
-  
-    <div id="top-bar">
-    </div>
-
-    <div id="main-container">
-      <div id="neighborhood-list" ng-controller="neighborhoodListCtrl">
-        <ul class="unstyled">
-            <li ng-cloak ng-repeat="neighborhood in neighborhoods">
-              <span class="selected-{{neighborhood.selected}}" ng-click="selectNeighborhood(neighborhood)">{{neighborhood.name}}</span>
-            </li>
-        </ul>
+    <div class="container-fluid">
+      <!-- Top row. Nav bar. -->
+      <div class="navbar navbar-static-top navbar-inverse">
+        <div class="navbar-inner">
+          <a class="brand" href="#">
+            <img src="img/tree-white.svg" width="26" height="26"/>
+            Heritage Trees of Portland
+          </a>
+        </div>
       </div>
-    
-      <div id="map_canvas"></div>
-    </div>
-    
+      <!-- Main row. Sidebar and map. -->
+      <div id="main-container" class="row-fluid">
+        <div id="sidebar" class="carousel slide span3">
+          <div class="carousel-inner">
+            <!-- Pane for the neighborhood list. -->
+            <div id="neighborhood-list-pane" class="active item">
+              <form class="form-search">
+                <input type="text" class="search-query" placeholder="Search Neighborhoods" />
+                <i class="icon-search" alt="Search"></i>
+                <i class="icon-remove-sign" alt="Clear Search"></i>
+              </form>
+              <div id="neighborhood-list" ng-controller="neighborhoodListCtrl">
+                <ul class="unstyled">
+                  <li ng-cloak ng-repeat="neighborhood in neighborhoods" 
+                    ng-click="selectNeighborhood(neighborhood)" 
+                    class="neighborhood selected-{{neighborhood.selected}}">
+                      {{neighborhood.name}}
+                  </li>
+                </ul>
+              </div>                          
+            </div>
+            <!-- Pane for neighborhood details. -->
+            <div id="neighborhood-details-pane" class="item">
+              NeighborhoodDetails
+            </div>
+          </div>
+        </div>
+        <!-- Map -->
+        <div id="map_canvas"> </div>
+      </div> <!-- </ #main-container> -->
+    </div>    
     <!-- libs -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>

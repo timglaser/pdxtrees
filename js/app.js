@@ -20,3 +20,11 @@ angular.module('app', ['app.config', 'app.services']).run(function(mapService){
   mapService.init();
 });
 
+
+$(document).ready(function() {
+  $('.carousel').carousel({ interval: false });
+
+  $('#neighborhood-details-pane').click(function(){
+    $('#sidebar.carousel').carousel('prev');
+  });
+});
