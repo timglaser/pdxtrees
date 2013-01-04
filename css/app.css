@@ -21,9 +21,14 @@
   overflow-y: hidden;
 }
 
+.carousel-inner {
+  height: 100%;
+}
+
 #neighborhood-list-pane,
 #neighborhood-details-pane {
   height:100%;
+  width:100%;
 }
 
 #neighborhood-list {
@@ -64,19 +69,6 @@
   opacity: 0.7;
 }
 /* End Neighborhood List  */
-
-.carousel-inner {
-  height: 100%;
-}
-
-div.neighborhood-list-pane-wrapper {
-  position: absolute;
-  top: 54px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: scroll;
-}
 
 li.neighborhood {
   color: #edeff2;

@@ -4,11 +4,18 @@
 function neighborhoodListCtrl($scope, neighborhoodService, mapService) {
 
   $scope.neighborhoods = [];
+  
+  $scope.neighborhoodNames = [];
  
   /**
    * To be triggered when a neighborhood has been selected in the UI.
    */
   $scope.selectNeighborhood = function(neighborhood) {
+    // Notify of selection change on the document level.
+    // todo: make custom event work for IE (http://dean.edwards.name/weblog/2009/03/callbacks-vs-events/)
+    var event = document.createEvent('CustomEvent');
+    event.initCustomEvent('neighborhoodChanged', false, false, { neighborhood: neighborhood });
+    document.dispatchEvent(event);
 
     // Indicate that the selection has changed in the neighborhood list.
     angular.forEach($scope.neighborhoods, function(nbrhd) {
@@ -32,16 +39,27 @@ function neighborhoodListCtrl($scope, neighborhoodService, mapService) {
       });
     }
     
-    neighborhoodService.getNeighborhoodTreeStats(neighborhood.id, function(stats) {
+/* neighborhoodService.getNeighborhoodTreeStats(neighborhood.id, function(stats) {
       // todo: display stats in the UI.
+      console.log(stats);
     }, function(errorMesssage) {
 
-    });
+    }); */
     
   };
 
   neighborhoodService.getNeighborhoods(function(rows) {
     $scope.neighborhoods = rows;
+    angular.forEach(rows, function(n) {
+      if (n && n.name) {
+        $scope.neighborhoodNames.push(n.name);
+      }
+    });
+    $('.typeahead').typeahead({
+      source: $scope.neighborhoodNames,
+      items: 8,
+      minLength: 1
+    });
   }, function(errorMessage) {
       // todo: show graceful error?
   });

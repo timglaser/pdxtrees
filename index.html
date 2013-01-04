@@ -26,12 +26,12 @@
       </div>
       <!-- Main row. Sidebar and map. -->
       <div id="main-container" class="row-fluid">
-        <div id="sidebar" class="carousel slide span3">
+        <div id="sidebar" class="carousel slide span4">
           <div class="carousel-inner">
             <!-- Pane for the neighborhood list. -->
             <div id="neighborhood-list-pane" class="active item">
               <form class="form-search">
-                <input type="text" class="search-query" placeholder="Search Neighborhoods" />
+                <input type="text" class="search-query" placeholder="Search Neighborhoods">
                 <i class="icon-search" alt="Search"></i>
                 <i class="icon-remove-sign" alt="Clear Search"></i>
               </form>
@@ -46,14 +46,25 @@
               </div>                          
             </div>
             <!-- Pane for neighborhood details. -->
-            <div id="neighborhood-details-pane" class="item">
-              NeighborhoodDetails
+            <div id="neighborhood-details-pane" class="item" ng-controller="neighborhoodDetailsCtrl">
+              <button class="btn" onclick="$('#sidebar.carousel').carousel('prev');"><i class="icon-chevron-left"></i>Neiborhoods</button>
+              <div class="well" style="margin:10px;">
+                <table class="table">
+                  <tr>
+                    <td>Avg Height</td><td>{{avgHeight}} ft</td><td></td>
+                  </tr>
+                  <tr>
+                    <td>Tallest</td><td>{{tallest}} ft</td><td><button class="btn-primary">Show</button></td>
+                  </tr>
+                </table>
+              </div>
             </div>
-          </div>
-        </div>
+          </div> <!-- /.carousel-inner -->
+        </div> <!-- /#sidebar -->
         <!-- Map -->
-        <div id="map_canvas"> </div>
-      </div> <!-- </ #main-container> -->
+        <div id="map_canvas">
+        </div>
+      </div> <!-- /#main-container -->
     </div>    
     <!-- libs -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -66,9 +77,10 @@
     <script type="text/javascript" src="js/services/NeighborhoodService.js"></script>
     <script type="text/javascript" src="js/services/MapService.js"></script>
     <!-- controllers -->
-    <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js?0.1"></script>
+    <script type="text/javascript" src="js/controllers/NeighborhoodDetailsCtrl.js?0.1"></script>
     <!-- app -->
-    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/app.js?0.1"></script>
     
   </body>
 </html>
