@@ -22,12 +22,15 @@ function neighborhoodDetailsCtrl($scope, neighborhoodService, mapService) {
       console.log(stats);
       $scope.numTrees = stats.num_trees;
       $scope.tallest = stats.tallest;
-      $scope.avgHeight = stats.avg_height;
-
+      $scope.avgHeight = stats.avg_height;      
     }, function(errorMesssage) {
 
     });    
   };  
+  
+  $scope.getNeighborhood = function() {
+    return _neighborhood;
+  };
   
   document.addEventListener("neighborhoodChanged", function(e) {
     if (e && e.detail && e.detail.neighborhood) {

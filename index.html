@@ -47,17 +47,25 @@
             </div>
             <!-- Pane for neighborhood details. -->
             <div id="neighborhood-details-pane" class="item" ng-controller="neighborhoodDetailsCtrl">
-              <button class="btn" onclick="$('#sidebar.carousel').carousel('prev');"><i class="icon-chevron-left"></i>Neiborhoods</button>
-              <div class="well" style="margin:10px;">
-                <table class="table">
-                  <tr>
-                    <td>Avg Height</td><td>{{avgHeight}} ft</td><td></td>
-                  </tr>
-                  <tr>
-                    <td>Tallest</td><td>{{tallest}} ft</td><td><button class="btn-primary">Show</button></td>
-                  </tr>
-                </table>
-              </div>
+              <div class="container-fluid">
+                <button class="btn btn-inverse" onclick="$('#sidebar.carousel').carousel('prev');">
+                  <i class="icon-chevron-left icon-white"></i>&nbsp;&nbsp;Neiborhoods
+                </button>
+                <h3>{{getNeighborhood().name}}</h3>
+                <div class="well">
+                  <strong>{{numTrees}} heritage trees found</strong>
+                  <div ng-show="numTrees > 0">
+                    <dl class="dl-horizontal">
+                      <dt>Avg Height</dt>
+                      <dd>{{avgHeight | number:0}} ft</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                      <dt>Tallest</dt>
+                      <dd>{{tallest | number:0}} ft <button class="btn btn-mini btn-info">Show</button></dd>
+                    </dl>
+                  </div>  
+                </div>
+              </div>  
             </div>
           </div> <!-- /.carousel-inner -->
         </div> <!-- /#sidebar -->
@@ -73,14 +81,14 @@
     <script type="text/javascript" src="libs/wax/js/wax.g.js"></script>
     <script type="text/javascript" src="libs/cartodb-gmaps/js/cartodb-gmapsv3.js"></script>
     <!-- services -->
-    <script type="text/javascript" src="js/services/CoreDbService.js"></script>
-    <script type="text/javascript" src="js/services/NeighborhoodService.js"></script>
-    <script type="text/javascript" src="js/services/MapService.js"></script>
+    <script type="text/javascript" src="js/services/CoreDbService.js?0.2"></script>
+    <script type="text/javascript" src="js/services/NeighborhoodService.js?0.2"></script>
+    <script type="text/javascript" src="js/services/MapService.js?0.2"></script>
     <!-- controllers -->
-    <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js?0.1"></script>
-    <script type="text/javascript" src="js/controllers/NeighborhoodDetailsCtrl.js?0.1"></script>
+    <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js?0.2"></script>
+    <script type="text/javascript" src="js/controllers/NeighborhoodDetailsCtrl.js?0.2"></script>
     <!-- app -->
-    <script type="text/javascript" src="js/app.js?0.1"></script>
+    <script type="text/javascript" src="js/app.js?0.2"></script>
     
   </body>
 </html>

@@ -5,38 +5,32 @@
 }
 .brand:hover>img {
   opacity: 1.0;
-}
-      
+}     
 #main-container {
   width: 100%;
   position: absolute;
   top: 51px;
   bottom: 0;
 }
-
 #sidebar {
   height:100%;
   background-color: #17181b;
   position: relative;
   overflow-y: hidden;
 }
-
 .carousel-inner {
   height: 100%;
 }
-
 #neighborhood-list-pane,
 #neighborhood-details-pane {
   height:100%;
   width:100%;
 }
-
 #neighborhood-list {
   height:100%; 
   padding-bottom: 54px; 
   overflow-y: scroll;
-}
-
+} 
 /* Neighborhood List Search  */
 #neighborhood-list-pane > .form-search {
   height: 54px;
@@ -69,7 +63,6 @@
   opacity: 0.7;
 }
 /* End Neighborhood List  */
-
 li.neighborhood {
   color: #edeff2;
   padding: 12px 9px;
@@ -79,12 +72,10 @@ li.neighborhood {
   border-top-color: #4f515d;
   cursor: pointer;
 }
-
 li.neighborhood:last-child {
   border-bottom: 1px solid #4f515d;
   margin-bottom: 54px;
 }
-
 li.neighborhood:hover, 
 li.neighborhood:active,
 li.neighborhood.selected-true  {
@@ -92,6 +83,30 @@ li.neighborhood.selected-true  {
   border-color: #17181b;
 }
 
+/**
+ * Neighborhood Details
+ */
+#neighborhood-details-pane {
+  background-color: #3f414b;
+}
+#neighborhood-details-pane .container-fluid {
+  padding: 15px;
+}
+#neighborhood-details-pane h3 {
+  color: whiteSmoke;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+#neighborhood-details-pane div.well dt {
+  width: 90px;
+}
+#neighborhood-details-pane div.well dd {
+  margin-left: 110px; 
+}
+#neighborhood-details-pane div.well dd > button {
+  margin-left: 15px;
+}
 /**
  * Map
  */
