@@ -2,7 +2,7 @@
  * neighborhoodListCtrl
  */
 function neighborhoodListCtrl($scope, $http, mapService) {
-
+  'use strict';
   //
   // This code only used to grab JSON from CartoDB that is then 
   // here into the controller.
@@ -749,34 +749,34 @@ function neighborhoodListCtrl($scope, $http, mapService) {
       "ymax": 45.4902946792264
     }
   ];
-  
-  
+
+
   var _selectedNeighborhood = null;
 
-  $scope.getSelected = function() {
+  $scope.getSelected = function () {
     return _selectedNeighborhood;
   };
 
   /**
    * To be triggered when a neighborhood has been selected in the UI.
    */
-  $scope.selectNeighborhood = function(neighborhood) {
+  $scope.selectNeighborhood = function (neighborhood) {
 
     _selectedNeighborhood = neighborhood;
-    
+
     // Update the neighborhood list.
-    angular.forEach($scope.neighborhoods, function(nbrhd) {
-      nbrhd.selected = nbrhd.id === neighborhood.id ? true : false;
+    angular.forEach($scope.neighborhoods, function (nbrhd) {
+      nbrhd.selected = nbrhd.id === _selectedNeighborhood.id ? true : false;
     });
 
     // Slide to details pane.
     $('#sidebar.carousel').carousel('next');
-    
+
     // Update map.
-    mapService.focusOnNeighborhood(neighborhood);
+    mapService.focusOnNeighborhood(_selectedNeighborhood);
   };
 
-  $scope.showNeighborhoodsList = function() {
+  $scope.showNeighborhoodsList = function () {
     $('#sidebar.carousel').carousel('prev');
   };
 

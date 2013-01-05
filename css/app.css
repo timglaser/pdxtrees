@@ -80,7 +80,7 @@ li.neighborhood:hover,
 li.neighborhood:active,
 li.neighborhood.selected-true  {
   background-color: #17181b;
-  border-color: #17181b;
+  border-color: #2a2c33;
 }
 
 /**
