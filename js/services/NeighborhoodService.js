@@ -7,7 +7,24 @@ function NeighborhoodService(coreDbService, debugging) {
   // Query templates.
   
   // Query for the list of neighborhood names.
-  var nbrhdSql = 'SELECT cartodb_id as id, initcap(name) as name, coalit FROM neighborhoods_pdx ORDER BY name';
+  var nbrhdSql = '' + 
+                'SELECT ' +
+                  'n.cartodb_id as id, ' +
+                  'initcap(n.name) as name, ' +
+                  'COUNT(*) as num_trees, ' +
+                  'MAX(t.height) as tallest, ' +
+                  'AVG(t.height) as avg_height ' +
+                'FROM neighborhoods_pdx as n ' +
+                
+                'JOIN heritage_trees_pdx as t ' +
+                'ON ST_Intersects(t.the_geom, n.the_geom) ' +
+                
+                'GROUP BY n.cartodb_id ' +
+                'HAVING COUNT(*) > 0 ' +
+                
+                'ORDER BY n.name';
+
+
 
   // Query for getting the bounds of a given neighborhood.
   var boundsSql = 'SELECT ST_XMin(ST_Extent(the_geom)) as xmin, ST_YMin(ST_Extent(the_geom)) as ymin, ' +
@@ -35,7 +52,7 @@ function NeighborhoodService(coreDbService, debugging) {
      * Provides a list of all neighborhoods via a callback.
      * 
      * @param onSuccess f(neighborhoods:array) {}. Each object in the array 
-     * contains the following properties: id, name, coalit.
+     * contains the following properties: id, name, num_trees.
      * @param onError f(errorMessage:string) {}
      */
     getNeighborhoods: function (onSuccess, onError) {

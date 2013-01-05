@@ -37,15 +37,7 @@ function neighborhoodListCtrl($scope, neighborhoodService, mapService) {
         // todo: show graceful error?
         // todo: zoom back out to all neighborhood view?
       });
-    }
-    
-/* neighborhoodService.getNeighborhoodTreeStats(neighborhood.id, function(stats) {
-      // todo: display stats in the UI.
-      console.log(stats);
-    }, function(errorMesssage) {
-
-    }); */
-    
+    }    
   };
 
   neighborhoodService.getNeighborhoods(function(rows) {

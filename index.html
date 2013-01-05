@@ -41,6 +41,9 @@
                     ng-click="selectNeighborhood(neighborhood)" 
                     class="neighborhood selected-{{neighborhood.selected}}">
                       {{neighborhood.name}}
+                      <span class="badge pull-right">{{neighborhood.num_trees}}&nbsp;
+                        <img src="img/tree-white.svg" width="15" height="15"/>
+                      </span>
                   </li>
                 </ul>
               </div>                          
@@ -53,10 +56,14 @@
                 </button>
                 <h3>{{getNeighborhood().name}}</h3>
                 <div class="well">
-                  <strong>{{numTrees}} heritage trees found</strong>
+                  <strong ng-pluralize count="numTrees"
+                      when="{'0': 'No heritage trees are registered in this neighbrhood.',
+                            '1': '1 heritage tree was found in this neighborhood.',
+                            'other': '{{numTrees}} heritage trees were found in this neighborhood.'}">
+                  </strong>
                   <div ng-show="numTrees > 0">
                     <dl class="dl-horizontal">
-                      <dt>Avg Height</dt>
+                      <dt>Avg Heightttttt More Than</dt>
                       <dd>{{avgHeight | number:0}} ft</dd>
                     </dl>
                     <dl class="dl-horizontal">
