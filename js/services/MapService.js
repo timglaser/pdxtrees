@@ -48,9 +48,13 @@ function MapService() {
       "WHERE n.cartodb_id = " + neighborhoodId;
   }
 
-  function zoomToNeighborhood(neighborhood) {
-    if (map && neighborhood && neighborhood.bounds) {
-      map.fitBounds(neighborhood.bounds);
+  function zoomToNeighborhood(n) {
+    if (map && n && n.xmin && n.xmax && n.ymin && n.ymax) {
+
+      var sw = new google.maps.LatLng(n.ymin, n.xmin);
+      var ne = new google.maps.LatLng(n.ymax, n.xmax);
+      var bounds = new google.maps.LatLngBounds(sw, ne);
+      map.fitBounds(bounds);
     }
   }
   

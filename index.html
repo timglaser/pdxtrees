@@ -26,7 +26,7 @@
       </div>
       <!-- Main row. Sidebar and map. -->
       <div id="main-container" class="row-fluid">
-        <div id="sidebar" class="carousel slide span4">
+        <div id="sidebar" class="carousel slide span4" ng-controller="neighborhoodListCtrl">
           <div class="carousel-inner">
             <!-- Pane for the neighborhood list. -->
             <div id="neighborhood-list-pane" class="active item">
@@ -35,40 +35,38 @@
                 <i class="icon-search" alt="Search"></i>
                 <i class="icon-remove-sign" alt="Clear Search"></i>
               </form>
-              <div id="neighborhood-list" ng-controller="neighborhoodListCtrl">
+              <div id="neighborhood-list">
                 <ul class="unstyled">
                   <li ng-cloak ng-repeat="neighborhood in neighborhoods" 
                     ng-click="selectNeighborhood(neighborhood)" 
                     class="neighborhood selected-{{neighborhood.selected}}">
                       {{neighborhood.name}}
-                      <span class="badge pull-right">{{neighborhood.num_trees}}&nbsp;
-                        <img src="img/tree-white.svg" width="15" height="15"/>
-                      </span>
+                      <span class="badge pull-right">{{neighborhood.numtrees}}</span>
                   </li>
                 </ul>
               </div>                          
             </div>
             <!-- Pane for neighborhood details. -->
-            <div id="neighborhood-details-pane" class="item" ng-controller="neighborhoodDetailsCtrl">
+            <div id="neighborhood-details-pane" class="item">
               <div class="container-fluid">
-                <button class="btn btn-inverse" onclick="$('#sidebar.carousel').carousel('prev');">
+                <button class="btn btn-inverse" ng-click="showNeighborhoodsList()">
                   <i class="icon-chevron-left icon-white"></i>&nbsp;&nbsp;Neiborhoods
                 </button>
-                <h3>{{getNeighborhood().name}}</h3>
+                <h3>{{getSelected().name}}</h3>
                 <div class="well">
-                  <strong ng-pluralize count="numTrees"
+                  <strong ng-pluralize count="getSelected().numtrees"
                       when="{'0': 'No heritage trees are registered in this neighbrhood.',
                             '1': '1 heritage tree was found in this neighborhood.',
-                            'other': '{{numTrees}} heritage trees were found in this neighborhood.'}">
+                            'other': '{{getSelected().numtrees}} heritage trees were found in this neighborhood.'}">
                   </strong>
-                  <div ng-show="numTrees > 0">
+                  <div ng-show="getSelected().numtrees > 0">
                     <dl class="dl-horizontal">
-                      <dt>Avg Heightttttt More Than</dt>
-                      <dd>{{avgHeight | number:0}} ft</dd>
+                      <dt>Avg Height</dt>
+                      <dd>{{getSelected().avgheight | number:0}} ft</dd>
                     </dl>
                     <dl class="dl-horizontal">
                       <dt>Tallest</dt>
-                      <dd>{{tallest | number:0}} ft <button class="btn btn-mini btn-info">Show</button></dd>
+                      <dd>{{getSelected().tallest | number:0}} ft <button class="btn btn-mini btn-info">Show</button></dd>
                     </dl>
                   </div>  
                 </div>
@@ -93,7 +91,6 @@
     <script type="text/javascript" src="js/services/MapService.js?0.2"></script>
     <!-- controllers -->
     <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js?0.2"></script>
-    <script type="text/javascript" src="js/controllers/NeighborhoodDetailsCtrl.js?0.2"></script>
     <!-- app -->
     <script type="text/javascript" src="js/app.js?0.2"></script>
     

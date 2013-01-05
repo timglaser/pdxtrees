@@ -9,9 +9,7 @@ config.constant('rootQueryUrl', 'http://timglaser.cartodb.com/api/v2/sql?q=');
 
 // Services
 angular.module('app.services', ['app.config'], function($provide) {
-  $provide.factory('coreDbService', ['$http', 'rootQueryUrl', 'debugging', CoreDbService]);
   $provide.factory('mapService', MapService);
-  $provide.factory('neighborhoodService', ['coreDbService', 'debugging', NeighborhoodService]);
 });
 
 
