@@ -1,22 +1,35 @@
+div.navbar {
+  height:42px;
+}
+.brand {
+  white-space:nowrap;
+  margin-bottom: 0px;
+}
 .brand>img {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   margin-right: 10px;
   opacity: 0.7;
 }
 .brand:hover>img {
   opacity: 1.0;
 }     
+a:focus,.btn:focus{
+    outline:none!important
+}
 #main-container {
   width: 100%;
   position: absolute;
-  top: 51px;
+  top: 47px;
   bottom: 0;
 }
 #sidebar {
   height:100%;
-  background-color: #17181b;
+  background-color: #3f414b;
   position: relative;
   overflow-y: hidden;
+}
+.carousel {
+  margin-bottom: 0;
 }
 .carousel-inner {
   height: 100%;
@@ -28,10 +41,9 @@
 }
 #neighborhood-list {
   height:100%; 
-  padding-bottom: 54px; 
   overflow-y: scroll;
 } 
-/* Neighborhood List Search  */
+/* Search Box  */
 #neighborhood-list-pane > .form-search {
   height: 54px;
   margin-bottom: 0;
@@ -62,32 +74,39 @@
   z-index: 2;
   opacity: 0.7;
 }
-/* End Neighborhood List  */
+/* End Search Box  */
 li.neighborhood {
   color: #edeff2;
   padding: 12px 9px;
   background-color: #3f414b;
-  margin-top: 1px; 
-  border-top: 1px solid;
-  border-top-color: #4f515d;
+/*   margin-top: 1px;  */
+  border-top: 1px solid #4f515d;
+  border-bottom: 1px solid #17181b;
+/*   border-top: 1px solid; */
+/*   border-top-color: #4f515d; */
   cursor: pointer;
 }
 li.neighborhood:last-child {
-  border-bottom: 1px solid #4f515d;
+/*
+  border-top: 1px solid #4f515d;
+  border-bottom: 1px solid #17181b;
+*/
   margin-bottom: 54px;
 }
-li.neighborhood:hover, 
-li.neighborhood:active,
+.no-touch li.neighborhood:hover,
+.no-touch li.neighborhood:active,
 li.neighborhood.selected-true  {
   background-color: #17181b;
   border-color: #2a2c33;
 }
 
+
+
 /**
  * Neighborhood Details
  */
 #neighborhood-details-pane {
-  background-color: #3f414b;
+/*   background-color: #3f414b; */
 }
 #neighborhood-details-pane .container-fluid {
   padding: 15px;

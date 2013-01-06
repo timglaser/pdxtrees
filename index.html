@@ -16,12 +16,46 @@
   <body>
     <div class="container-fluid">
       <!-- Top row. Nav bar. -->
-      <div class="navbar navbar-static-top navbar-inverse">
+      <div class="navbar navbar-static-top">
         <div class="navbar-inner">
-          <a class="brand" href="#">
-            <img src="img/tree-white.svg" alt="Logo" width="26" height="26"/>
-            Heritage Trees of Portland
+          <a href="#aboutModal" class="brand" data-toggle="modal" data-target="#aboutModal">
+            <img src="img/tree-black.svg" alt="Logo" width="20" height="13"/>
+            Portland's Heritage Trees
           </a>
+
+          <div class="btn-group pull-right">
+            <button id="btn-about" class="btn" data-toggle="modal" data-target="#aboutModal">
+              <i class="icon-info-sign"></i>&nbsp;&nbsp;Info
+            </button>
+<!--
+            <button id="btn-recommend" class="btn" data-toggle="modal" data-target="#aboutModal">
+              <i class="icon-plus-sign"></i>&nbsp;&nbsp;Recommend a Tree
+            </button>
+-->
+          </div>
+          
+          <!-- Modal -->
+          <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="aboutModalLabel">
+                <!-- <img src="img/tree-black.svg" alt="Logo" width="20" height="20" style="padding-right:10px; padding-bottom:5px;"/> -->
+                Information
+              </h3>
+            </div>
+            <div class="modal-body">
+              <h4>What is a Heritage Tree?</h4>
+              <p>A Portland City ordinance was passed in 1993 that calls for the Urban Forestry Commission to maintain a list of Heritage Trees. These trees are chosen based on their age, size, type, historical association or horticultural value and are placed under extra protection.</p>
+              <p>For further information, or to nominate a tree for future consideration, please visit the <a target="_blank" href="http://www.portlandoregon.gov/parks/40280">Portland Parks & Recreation</a> website.</p>
+              <h4>Credits</h4>
+              <p>Data for this app was provided by the City of Portland via <a href="http://civicapps.org/">civicapps.org</a>.
+              <p>The <a href="http://thenounproject.com/noun/tree/#icon-No7612" target="_blank">Tree</a> icon was designed by <a href="http://thenounproject.com/humberto.pornaro" target="_blank">Humberto Pornaro</a> from The Noun Project.</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Got it!</button>
+            </div>
+          </div>
+          <!-- /Modal -->
         </div>
       </div>
       <!-- Main row. Sidebar and map. -->
@@ -41,7 +75,7 @@
                     ng-click="selectNeighborhood(neighborhood)" 
                     class="neighborhood selected-{{neighborhood.selected}}">
                       {{neighborhood.name}}
-                      <span class="badge pull-right">{{neighborhood.numtrees}}</span>
+                      <span class="badge badge-success pull-right">{{neighborhood.numtrees}}</span>
                   </li>
                 </ul>
               </div>                          
@@ -54,11 +88,11 @@
                 </button>
                 <h3>{{getSelected().name}}</h3>
                 <div class="well">
-                  <strong ng-pluralize count="getSelected().numtrees"
-                      when="{'0': 'No heritage trees are registered in this neighbrhood.',
-                            '1': '1 heritage tree was found in this neighborhood.',
-                            'other': '{{getSelected().numtrees}} heritage trees were found in this neighborhood.'}">
-                  </strong>
+                  <span class="label label-success" ng-pluralize count="getSelected().numtrees"
+                    when="{'0': 'no heritage trees',
+                          '1': '1 heritage tree',
+                          'other': '{{getSelected().numtrees}} heritage trees'}">
+                  </span>
                   <div ng-show="getSelected().numtrees > 0">
                     <dl class="dl-horizontal">
                       <dt>Avg Height</dt>
@@ -80,11 +114,12 @@
       </div> <!-- /#main-container -->
     </div>    
     <!-- libs -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="libs/wax/js/wax.g.js"></script>
     <script type="text/javascript" src="libs/cartodb-gmaps/js/cartodb-gmapsv3.js"></script>
+    <!-- <script type="text/javascript" src="libs/jquery.kinetic/js/jquery.kinetic.min.js"></script> -->
     <!-- services -->
     <script type="text/javascript" src="js/services/MapService.js?0.2"></script>
     <!-- controllers -->

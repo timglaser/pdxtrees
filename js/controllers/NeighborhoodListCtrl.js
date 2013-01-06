@@ -769,11 +769,11 @@ function neighborhoodListCtrl($scope, $http, mapService) {
       nbrhd.selected = nbrhd.id === _selectedNeighborhood.id ? true : false;
     });
 
-    // Slide to details pane.
-    $('#sidebar.carousel').carousel('next');
-
     // Update map.
     mapService.focusOnNeighborhood(_selectedNeighborhood);
+
+    // Slide to details pane.
+    $('#sidebar.carousel').carousel('next');
   };
 
   $scope.showNeighborhoodsList = function () {

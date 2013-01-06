@@ -18,8 +18,12 @@ function MapService() {
       map: map,
       user_name: cartoDbUserName,
       table_name: 'neighborhoods_pdx',
-      query: "SELECT * FROM {{table_name}}",
-      map_style: true,
+      query: 'SELECT n.*, COUNT(*) as numtrees FROM neighborhoods_pdx as n ' +
+        'JOIN heritage_trees_pdx as t ' +
+        'ON ST_Intersects(t.the_geom, n.the_geom) ' +
+        'GROUP BY n.cartodb_id ' +
+        'HAVING COUNT(*) > 0',
+      map_style: false,
       debug: false
     });
   }
@@ -33,20 +37,22 @@ function MapService() {
   }
 
   function showTreesInNeighborhood(neighborhoodId) {
-    if (treesLayer) {
-      // Clear previous instance.
-      treesLayer.setMap(null);
-      treesLayer = null;
+    var newQuery = getTreesQuery(neighborhoodId);
+    if (!treesLayer) {
+      // Initial setup of trees layer.
+      treesLayer = new CartoDBLayer({
+        map_canvas: mapDivId,
+        map: map,
+        user_name: cartoDbUserName,
+        table_name: 'heritage_trees_pdx',
+        query: newQuery,
+        map_style: true,
+        debug: false
+      });
+    } else if (treesLayer.options.query !== newQuery) {
+      // A different neighborhood has been selected. Use the new query.
+      treesLayer.setQuery(newQuery);
     }
-    treesLayer = new CartoDBLayer({
-      map_canvas: mapDivId,
-      map: map,
-      user_name: cartoDbUserName,
-      table_name: 'heritage_trees_pdx',
-      query: getTreesQuery(neighborhoodId),
-      map_style: true,
-      debug: false
-    });
   }
 
   function zoomToNeighborhood(n) {
