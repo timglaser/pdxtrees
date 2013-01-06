@@ -778,6 +778,7 @@ function neighborhoodListCtrl($scope, $http, mapService) {
 
   $scope.showNeighborhoodsList = function () {
     $('#sidebar.carousel').carousel('prev');
+    mapService.focusOnCity();
   };
 
 }

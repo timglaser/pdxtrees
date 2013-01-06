@@ -79,18 +79,12 @@ li.neighborhood {
   color: #edeff2;
   padding: 12px 9px;
   background-color: #3f414b;
-/*   margin-top: 1px;  */
   border-top: 1px solid #4f515d;
   border-bottom: 1px solid #17181b;
-/*   border-top: 1px solid; */
-/*   border-top-color: #4f515d; */
+  border-right: 1px solid #4f515d;
   cursor: pointer;
 }
 li.neighborhood:last-child {
-/*
-  border-top: 1px solid #4f515d;
-  border-bottom: 1px solid #17181b;
-*/
   margin-bottom: 54px;
 }
 .no-touch li.neighborhood:hover,

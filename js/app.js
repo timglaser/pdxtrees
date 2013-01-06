@@ -16,6 +16,7 @@ angular.module('app.services', ['app.config'], function ($provide) {
 // App start.
 angular.module('app', ['app.config', 'app.services']).run(function (mapService) {
   mapService.init();
+  mapService.focusOnCity();
 });
 
 
