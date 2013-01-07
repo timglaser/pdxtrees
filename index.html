@@ -1,1 +1,126 @@
-test
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Heritage Trees of Portland, Oregon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Learn about the heritage trees of Portland, Oregon.">
+    <meta name="author" content="Tim Glaser - https://github.com/timglaser">
+
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="libs/cartodb-gmaps/css/cartodb-gmapsv3.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Top row. Nav bar. -->
+      <div class="navbar navbar-static-top navbar-inverse">
+        <div class="navbar-inner">
+          <a href="#aboutModal" class="brand" data-toggle="modal" data-target="#aboutModal">
+            <!-- <img src="img/tree-white.svg" alt="Logo" width="20" height="13"/> -->
+            Heritage Trees of Portland
+          </a>
+
+          <div class="btn-group pull-right">
+            <button id="btn-about" class="btn" data-toggle="modal" data-target="#aboutModal">
+              <i class="icon-info-sign"></i>&nbsp;&nbsp;Info
+            </button>
+          </div>
+          
+          <!-- Modal -->
+          <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="aboutModalLabel">
+                <!-- <img src="img/tree-black.svg" alt="Logo" width="20" height="20" style="padding-right:10px; padding-bottom:5px;"/> -->
+                Information
+              </h3>
+            </div>
+            <div class="modal-body">
+              <h4>What is a Heritage Tree?</h4>
+              <p>A Portland City ordinance was passed in 1993 that calls for the Urban Forestry Commission to maintain a list of Heritage Trees. These trees are chosen based on their age, size, type, historical association or horticultural value and are placed under extra protection.</p>
+              <p>For further information, or to nominate a tree for future consideration, please visit the <a href="http://www.portlandoregon.gov/parks/40280" target="_blank">Portland Parks & Recreation</a> website.</p>
+              <h4>Credits</h4>
+              <p>Data for this app was provided by the City of Portland via <a href="http://civicapps.org/" target="_blank">civicapps.org</a>.
+              <p>The <a href="http://thenounproject.com/noun/tree/#icon-No7612" target="_blank">Tree</a> icon was designed by <a href="http://thenounproject.com/humberto.pornaro" target="_blank">Humberto Pornaro</a> from The Noun Project.</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Got it!</button>
+            </div>
+          </div>
+          <!-- /Modal -->
+        </div>
+      </div>
+      <!-- Main row. Sidebar and map. -->
+      <div id="main-container" class="row-fluid">
+        <div id="sidebar" class="carousel slide span4" ng-controller="neighborhoodListCtrl">
+          <div class="carousel-inner">
+            <!-- Pane for the neighborhood list. -->
+            <div id="neighborhood-list-pane" class="active item">
+<!--
+              <div class="prompt">
+                <p class="lead">Select a neighborhood. Explore its trees!</p>
+              </div>
+-->
+              <div id="neighborhood-list">
+                <ul class="unstyled">
+                  <li ng-cloak ng-repeat="neighborhood in neighborhoods" id="neighborhood-{{neighborhood.id}}"
+                    ng-click="selectNeighborhood(neighborhood)" 
+                    class="neighborhood selected-{{neighborhood.selected}}">
+                      {{neighborhood.name}}
+                      <span class="badge badge-success pull-right">{{neighborhood.numtrees}}</span>
+                  </li>
+                </ul>
+              </div>                          
+            </div>
+            <!-- Pane for neighborhood details. -->
+            <div id="neighborhood-details-pane" class="item">
+              <div class="container-fluid">
+                <button class="btn btn-inverse" ng-click="showNeighborhoodsList()">
+                  <i class="icon-chevron-left icon-white"></i>&nbsp;&nbsp;Neiborhoods
+                </button>
+                <h3>{{getSelected().name}}</h3>
+                <div class="well">
+                  <span class="label label-success" ng-pluralize count="getSelected().numtrees"
+                    when="{'0': 'no heritage trees',
+                          '1': '1 heritage tree',
+                          'other': '{{getSelected().numtrees}} heritage trees'}">
+                  </span>
+                  <div ng-show="getSelected().numtrees > 0">
+                    <dl class="dl-horizontal">
+                      <dt>Avg Height</dt>
+                      <dd>{{getSelected().avgheight | number:0}} ft</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                      <dt>Tallest</dt>
+                      <dd>{{getSelected().tallest | number:0}} ft <button class="btn btn-mini btn-info">Show</button></dd>
+                    </dl>
+                  </div>  
+                </div>
+              </div>  
+            </div>
+          </div> <!-- /.carousel-inner -->
+        </div> <!-- /#sidebar -->
+        <!-- Map -->
+        <div id="map_canvas">
+        </div>
+      </div> <!-- /#main-container -->
+    </div>    
+    <!-- libs -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="libs/wax/js/wax.g.js"></script>
+    <script type="text/javascript" src="libs/cartodb-gmaps/js/cartodb-gmapsv3.js"></script>
+    <!-- <script type="text/javascript" src="libs/jquery.kinetic/js/jquery.kinetic.min.js"></script> -->
+    <!-- services -->
+    <script type="text/javascript" src="js/services/MapService.js?0.2"></script>
+    <!-- controllers -->
+    <script type="text/javascript" src="js/controllers/NeighborhoodListCtrl.js?0.2"></script>
+    <!-- app -->
+    <script type="text/javascript" src="js/app.js?0.2"></script>
+    
+  </body>
+</html>

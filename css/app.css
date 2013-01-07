@@ -1,0 +1,170 @@
+div.navbar {
+  height:42px;
+}
+.brand {
+  white-space:nowrap;
+}
+.brand>img {
+  margin-bottom: 6px;
+  margin-right: 10px;
+  opacity: 0.7;
+}
+.brand:hover>img {
+  opacity: 1.0;
+}     
+a:focus,.btn:focus{
+    outline:none!important
+}
+#main-container {
+  width: 100%;
+  position: absolute;
+  top: 41px;
+  bottom: 0;
+}
+#sidebar {
+  height:100%;
+  background-color: #3f414b;
+  position: relative;
+  overflow-y: hidden;
+}
+.carousel {
+  margin-bottom: 0;
+}
+.carousel-inner {
+  height: 100%;
+}
+#neighborhood-list-pane,
+#neighborhood-details-pane {
+  height:100%;
+  width:100%;
+}
+#neighborhood-list {
+  height:100%; 
+  overflow-y: scroll;
+} 
+/* Prompt */
+#neighborhood-list-pane > div.prompt {
+  height: 54px;
+  margin-bottom: 0;
+  position: relative;
+  background-color: #303745;
+}
+#neighborhood-list-pane > div.prompt > p {
+  width: 100%;
+  color: #ddd;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  
+}
+
+/* Search Box  */
+#neighborhood-list-pane > .form-search {
+  height: 54px;
+  margin-bottom: 0;
+  position: relative;
+  background-color: #303745;
+}
+#neighborhood-list-pane > .form-search > .search-query {
+  width: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 1;
+}
+#neighborhood-list-pane > .form-search > .icon-search {
+  position: absolute;
+  top:18px;
+  left:18px;
+  z-index: 2;
+  opacity: 0.7;
+}
+#neighborhood-list-pane > .form-search > .icon-remove-sign {
+  position: absolute;
+  top:18px;
+  right:18px;
+  z-index: 2;
+  opacity: 0.7;
+}
+/* End Search Box  */
+#neighborhood-list > ul {
+  margin-bottom: 0;
+}
+li.neighborhood {
+  color: #edeff2;
+  padding: 12px 9px;
+  background-color: #3f414b;
+  border-top: 1px solid #4f515d;
+  border-bottom: 1px solid #17181b;
+  border-right: 1px solid #4f515d;
+  cursor: pointer;
+}
+.no-touch li.neighborhood:hover,
+.no-touch li.neighborhood:active,
+li.neighborhood.selected-true  {
+  background-color: #17181b;
+  border-top-color: #17181b; 
+  border-bottom-color: #2a2c33;
+}
+/*
+li.neighborhood:last-child {
+  margin-bottom: 54px;
+}
+*/
+
+
+/**
+ * Neighborhood Details
+ */
+#neighborhood-details-pane .container-fluid {
+  padding: 15px;
+}
+#neighborhood-details-pane h3 {
+  color: whiteSmoke;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+#neighborhood-details-pane div.well dt {
+  width: 90px;
+}
+#neighborhood-details-pane div.well dd {
+  margin-left: 110px; 
+}
+#neighborhood-details-pane div.well dd > button {
+  margin-left: 15px;
+}
+
+
+/**
+ * Map
+ */
+#map_canvas {
+  height:100%;
+}
+div.treeInfo {
+  padding: 0 15px;
+}
+div.treeInfo h4 {
+  margin-bottom: 0;
+}
+div.treeInfo dl.dl-horizontal dt {
+  width:100px;
+}
+div.treeInfo dl.dl-horizontal dd {
+  margin-left: 120px;
+}
+
+
+/* I'm not sure why bootstrap specifies a 20px side padding for widths under 
+   767px but it causes awkwardness in this layout so I'm overriding it */
+@media (max-width: 767px) {
+  body {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
