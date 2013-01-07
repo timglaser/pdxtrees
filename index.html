@@ -81,22 +81,67 @@
                 <button class="btn btn-inverse" ng-click="showNeighborhoodsList()">
                   <i class="icon-chevron-left icon-white"></i>&nbsp;&nbsp;Neiborhoods
                 </button>
-                <h3>{{getSelected().name}}</h3>
-                <div class="well">
-                  <span class="label label-success" ng-pluralize count="getSelected().numtrees"
-                    when="{'0': 'no heritage trees',
-                          '1': '1 heritage tree',
-                          'other': '{{getSelected().numtrees}} heritage trees'}">
+                <div id="neighborhood-details-heading" class="row-fluid">
+                  <h3 class="title float-left">{{getSelected().name}}</h3>
+                  <span class="label label-success float-left" ng-pluralize count="getSelected().numtrees"
+                    when="{'0': 'no Heritage Trees',
+                         '1': '1 Heritage Tree',
+                         'other': '{{getSelected().numtrees}} Heritage Trees'}">
                   </span>
-                  <div ng-show="getSelected().numtrees > 0">
-                    <dl class="dl-horizontal">
-                      <dt>Avg Height</dt>
-                      <dd>{{getSelected().avgheight | number:0}} ft</dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                      <dt>Tallest</dt>
-                      <dd>{{getSelected().tallest | number:0}} ft <button class="btn btn-mini btn-info">Show</button></dd>
-                    </dl>
+
+                </div>
+                <div class="well" ng-show="getSelected().numtrees > 0">
+                  <div>
+                    <div class="stat-section">
+                      <h4>Tree Height</h4>
+                      <dl class="dl-horizontal">
+                        <dt>Tallest</dt>
+                        <dd>
+                          <button class="btn btn-small" ng-click"selectTallest()">
+                            {{getSelected().tallest | number:0}} ft
+                            &nbsp;&nbsp;<img src="img/tree-green.svg" alt="view tallest" width="13" height="13"/>
+                          </button>
+                          </dd>
+                        <dt>Avgerage</dt>
+                        <dd>
+                          {{getSelected().avgheight | number:0}} ft
+                        </dd>
+                      </dl>
+                    </div>
+                    <hr>
+                    <div class="stat-section">
+                      <h4>Branch Spread</h4>
+                      <dl class="dl-horizontal">
+                        <dt>Widest</dt>
+                        <dd>
+                          <button class="btn btn-small">
+                            {{getSelected().mostspread | number:0}} ft
+                            &nbsp;&nbsp;<img src="img/tree-green.svg" alt="view tallest" width="13" height="13"/>
+                          </button>
+                        </dd>
+                        <dt>Avgerage</dt>
+                        <dd>
+                          {{getSelected().spread | number:0}} ft
+                        </dd>
+                      </dl>
+                    </div>
+                    <hr>
+                    <div class="stat-section">
+                      <h4>Trunk Diameter</h4>
+                      <dl class="dl-horizontal">
+                        <dt>Thickest</dt>
+                        <dd>
+                          <button class="btn btn-small">
+                            {{getSelected().thickest | number:0}} in
+                            &nbsp;&nbsp;<img src="img/tree-green.svg" alt="view tallest" width="13" height="13"/>
+                          </button>
+                        </dd>
+                        <dt>Avgerage</dt>
+                        <dd>
+                          {{getSelected().avgdiameter | number:0}} in
+                        </dd>
+                      </dl>
+                    </div>
                   </div>  
                 </div>
               </div>  
@@ -104,7 +149,7 @@
           </div> <!-- /.carousel-inner -->
         </div> <!-- /#sidebar -->
         <!-- Map -->
-        <div id="map_canvas">
+        <div id="map_canvas" class="span8">
         </div>
       </div> <!-- /#main-container -->
     </div>    

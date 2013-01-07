@@ -111,7 +111,7 @@ function MapService() {
         map_style: false,
         debug: true,
         interactivity: 'cartodb_id, address, circumfere, common_nam, diameter, ' + 
-          'height, notes, owner, scientific, spread, year',
+          'height, owner, scientific, spread, year',
         featureOver: function (mouseEvent, latlng, point, data) {
           map.setOptions({'draggableCursor': 'pointer'});
         },
@@ -137,11 +137,12 @@ function MapService() {
               '<small>' + data.scientific + '</small>' +
               '<dl class="dl-horizontal">' +
                 '<dt>Height</dt><dd>' + data.height + 'ft</dd>' +
-                '<dt>Diameter</dt><dd>' + data.diameter + 'ft</dd>' +
-                '<dt>Circumference</dt><dd>' + data.circumfere + 'ft</dd>' +
                 '<dt>Spread</dt><dd>' + data.spread + 'ft</dd>' +
+                '<dt>Diameter</dt><dd>' + data.diameter + 'in</dd>' +
+                '<dt>Circumference</dt><dd>' + data.circumfere + 'in</dd>' +
                 '<dt>Year Added</dt><dd>' + data.year + '</dd>' +
                 '<dt>Address</dt><dd>' + data.address + '</dd>' +
+                (data.owner !== undefined ? ('<dt>Ownership</dt><dd>' + data.owner + '</dd>') : '') +
               '</dl>' +
             '</div>';
             

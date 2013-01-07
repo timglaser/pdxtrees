@@ -25,37 +25,27 @@ $(document).ready(function () {
   
   if ('ontouchstart' in document.documentElement) {
     $('body').addClass('touch');
-    // not working on ipad $('#neighborhood-list').kinetic({x:false, triggerHardware: true});
   } else {
     $('body').addClass('no-touch');
   }
-  
-/*
-  $('#neighborhood-list-pane .search-query').tooltip({ 
-    placement: 'bottom',
-    title: 'Select a neighborhood to explore our heritage trees.',
-    trigger: 'manual'
-  });
-    
-  $('#neighborhood-list-pane .search-query').tooltip('show');
-  
-*/
-/*
-  $('.search-query').popover({ 
-    placement: 'bottom',
-    html: true,
-    content: '<p class="lead">Select a neighborhood to start exploring our heritage trees.<p><button class="btn btn-primary pull-right" onclick="$(".search-query").popover("hide");">Got it!</button>',
-    trigger: 'manual'
-  });
-    
-  $('.search-query').popover('show');
-*/
-/*
-  $('.popover').css({ 
-    'color' : 'red',
-    'left' : 'auto',
-    'right' : '10px'});
-*/
 
-  
+  // Adapt sidebar width depending on the window size.
+  var onResize = function () {
+    if($(window).width() > 1200) {
+      // Wide screen. We can use a thinner sidebar be so wide.
+      $('#sidebar').removeClass('span5').removeClass('span4').addClass('span3');
+      $('#map_canvas').removeClass('span7').removeClass('span8').addClass('span9');
+
+    } else if($(window).width() < 800) {
+      // Slim screen. Could use a wider sidebar.
+      $('#sidebar').removeClass('span4').removeClass('span3').addClass('span5');
+      $('#map_canvas').removeClass('span8').removeClass('span9').addClass('span7');
+    } else {
+      // Somewhere in between.
+      $('#sidebar').removeClass('span5').removeClass('span3').addClass('span4');
+      $('#map_canvas').removeClass('span7').removeClass('span9').addClass('span8');
+    }
+  };
+  onResize();
+  $(window).resize(onResize);
 });

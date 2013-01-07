@@ -123,20 +123,28 @@ li.neighborhood:last-child {
 #neighborhood-details-pane .container-fluid {
   padding: 15px;
 }
-#neighborhood-details-pane h3 {
+#neighborhood-details-heading h3 {
   color: whiteSmoke;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+#neighborhood-details-heading .label {
   margin-bottom: 10px;
-  margin-left: 10px;
 }
-#neighborhood-details-pane div.well dt {
-  width: 90px;
+#neighborhood-details-pane div.well {
+  padding: 0;
 }
-#neighborhood-details-pane div.well dd {
-  margin-left: 110px; 
+#neighborhood-details-pane div.well > div {
+  margin: 15px;
 }
-#neighborhood-details-pane div.well dd > button {
-  margin-left: 15px;
+#neighborhood-details-pane .dl-horizontal dt {
+  width: 70px;
+}
+#neighborhood-details-pane .dl-horizontal dd {
+  margin-left: 90px; 
+}
+#neighborhood-details-pane .dl-horizontal dd > button {
+  margin-left: -8px;
 }
 
 
