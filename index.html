@@ -71,7 +71,7 @@
               </form>
               <div id="neighborhood-list">
                 <ul class="unstyled">
-                  <li ng-cloak ng-repeat="neighborhood in neighborhoods" 
+                  <li ng-cloak ng-repeat="neighborhood in neighborhoods" id="neighborhood-{{neighborhood.id}}"
                     ng-click="selectNeighborhood(neighborhood)" 
                     class="neighborhood selected-{{neighborhood.selected}}">
                       {{neighborhood.name}}

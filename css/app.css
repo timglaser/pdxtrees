@@ -120,12 +120,27 @@ li.neighborhood.selected-true  {
 #neighborhood-details-pane div.well dd > button {
   margin-left: 15px;
 }
+
+
 /**
  * Map
  */
 #map_canvas {
   height:100%;
 }
+div.treeInfo {
+  padding: 0 15px;
+}
+div.treeInfo h4 {
+  margin-bottom: 0;
+}
+div.treeInfo dl.dl-horizontal dt {
+  width:100px;
+}
+div.treeInfo dl.dl-horizontal dd {
+  margin-left: 120px;
+}
+
 
 /* I'm not sure why bootstrap specifies a 20px side padding for widths under 
    767px but it causes awkwardness in this layout so I'm overriding it */

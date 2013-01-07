@@ -3,45 +3,6 @@
  */
 function neighborhoodListCtrl($scope, $http, mapService) {
   'use strict';
-  //
-  // This code only used to grab JSON from CartoDB that is then 
-  // here into the controller.
-  //
-/*
-  var rootQueryUrl = 'http://timglaser.cartodb.com/api/v2/sql?q=';
-  var nbrhdSql = '' + 
-      'SELECT ' +
-        'n.cartodb_id as id, ' +
-        'initcap(n.name) as name, ' +
-
-        'COUNT(*) as numTrees, ' +
-        'MAX(t.height) as tallest, ' +
-        'AVG(t.height) as avgHeight, ' +
-        
-        'ST_XMin(ST_Extent(n.the_geom)) as xmin, ' +
-        'ST_YMin(ST_Extent(n.the_geom)) as ymin, ' +
-        'ST_XMax(ST_Extent(n.the_geom)) as xmax, '+
-        'ST_YMax(ST_Extent(n.the_geom)) as ymax  ' +
-        
-      'FROM neighborhoods_pdx as n ' +
-      
-      'JOIN heritage_trees_pdx as t ' +
-      'ON ST_Intersects(t.the_geom, n.the_geom) ' +
-      
-      'GROUP BY n.cartodb_id ' +
-      'HAVING COUNT(*) > 0 ' +
-      
-      'ORDER BY n.name';
-  
-  $http.get(rootQueryUrl + nbrhdSql).success(function(data, status, headers, config) {
-    console.log(angular.toJson(data.rows));
-  }).error(function(data, status, headers, config) {
-    console.log('FAIL: '+ (data||{}).error +'.  Http status is ' + status);
-  });
-*/
-  //
-  // End of JSON grab code.
-  //
 
   $scope.neighborhoods = [
     {
@@ -751,10 +712,10 @@ function neighborhoodListCtrl($scope, $http, mapService) {
   ];
 
 
-  var _selectedNeighborhood = null;
+  $scope._selectedNeighborhood = null;
 
   $scope.getSelected = function () {
-    return _selectedNeighborhood;
+    return $scope._selectedNeighborhood;
   };
 
   /**
@@ -762,19 +723,30 @@ function neighborhoodListCtrl($scope, $http, mapService) {
    */
   $scope.selectNeighborhood = function (neighborhood) {
 
-    _selectedNeighborhood = neighborhood;
+    $scope._selectedNeighborhood = neighborhood;
 
     // Update the neighborhood list.
     angular.forEach($scope.neighborhoods, function (nbrhd) {
-      nbrhd.selected = nbrhd.id === _selectedNeighborhood.id ? true : false;
+      nbrhd.selected = nbrhd.id === $scope._selectedNeighborhood.id ? true : false;
     });
 
     // Update map.
-    mapService.focusOnNeighborhood(_selectedNeighborhood);
+    mapService.focusOnNeighborhood($scope._selectedNeighborhood);
 
     // Slide to details pane.
     $('#sidebar.carousel').carousel('next');
   };
+
+  // Set call back that allows map clicks to select a neighborhood.
+  mapService.setSelectNeighborhoodCallback(function (idOfMapSelection) {
+    var $listItem = $('#neighborhood-'+idOfMapSelection);
+    var $list = $('#neighborhood-list');
+    var newScrollTop = $list.scrollTop();
+    newScrollTop = newScrollTop + $listItem.offset().top;
+    newScrollTop = newScrollTop - ($listItem.outerHeight() + 100);
+    $list.scrollTop(newScrollTop);
+    $listItem.trigger('click');
+  });
 
   $scope.showNeighborhoodsList = function () {
     $('#sidebar.carousel').carousel('prev');

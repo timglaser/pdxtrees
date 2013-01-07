@@ -1,9 +1,12 @@
 function MapService() {
   'use strict';
-  var map, boundariesLayer, singleNeighborhoodLayer,
+  var self = this, map, infoWindow, boundariesLayer, singleNeighborhoodLayer,
     treesLayer, focusedNeighborhoodId, zoomedNeighborhoodId,
-    mapDivId = 'map_canvas', cartoDbUserName = 'timglaser';
+    mapDivId = 'map_canvas', cartoDbUserName = 'timglaser', selectNeighborhood;
 
+  /**
+   * Shows an all neighborhood boundaries as an interactive layer.
+   */
   function showAllNeighborhoodsLayer() {
     var query = 'SELECT n.*, COUNT(*) as numtrees FROM neighborhoods_pdx as n ' +
       'JOIN heritage_trees_pdx as t ' +
@@ -22,7 +25,19 @@ function MapService() {
         query: query,
         layer_order: 'bottom',
         map_style: false,
-        debug: true
+        debug: true,
+        interactivity: 'cartodb_id',
+        featureOver: function (mouseEvent, latlng, point, data) {
+          map.setOptions({'draggableCursor': 'pointer'});
+        },
+        featureOut: function (mouseEvent, latlng, point, data) {
+          map.setOptions({'draggableCursor': ''});
+        },
+        featureClick: function (event, latlng, point, data) {
+          if (typeof selectNeighborhood === 'function') {
+            selectNeighborhood(data.cartodb_id);
+          }
+        }
       });
     } else {
       // Re-attach to the map.
@@ -36,6 +51,9 @@ function MapService() {
     }
   }
 
+  /**
+   * Shows only the boundary for the given neighborhood as a non-interactive layer.
+   */
   function showSingleNeighborhoodLayer(neighborhoodId) {
     var newQuery = 'SELECT * FROM neighborhoods_pdx_2 WHERE cartodb_id = ' + neighborhoodId;
 
@@ -76,6 +94,9 @@ function MapService() {
       'WHERE n.cartodb_id = ' + neighborhoodId;
   }
 
+  /**
+   * Shows the trees in the given neighborhood as an interactive layer.
+   */
   function showTreesInNeighborhood(neighborhoodId) {
     var newQuery = getTreesQuery(neighborhoodId);    
     if (!treesLayer) {
@@ -87,19 +108,48 @@ function MapService() {
         table_name: 'heritage_trees_pdx',
         query: newQuery,
         layer_order: 'top',
+        map_style: false,
+        debug: true,
         interactivity: 'cartodb_id, address, circumfere, common_nam, diameter, ' + 
           'height, notes, owner, scientific, spread, year',
         featureOver: function (mouseEvent, latlng, point, data) {
-          console.log('featureOVER');
+          map.setOptions({'draggableCursor': 'pointer'});
         },
         featureOut: function (mouseEvent, latlng, point, data) {
-          console.log('featureOUT');
+          map.setOptions({'draggableCursor': ''});
         },
-        featureClick: function (mouseEvent, latlng, point, data) {
-          console.log('featureCLICKED');
-        },
-        map_style: false,
-        debug: true
+        featureClick: function (event, latlng, point, data) {
+          // Prevent double dipping (featureClick gets called twice; once as 
+          // 'click', once as 'touchend'
+
+          /* ipad touches aren't working if using this snippet to prevent double dipping: 
+          var validTouch = ($('body').hasClass('touch') && event.type === 'touchend');
+          var validClick = ($('body').hasClass('no-touch') && event.type === 'click');
+          if (validTouch || validClick) {
+          } */
+
+          // This test doesn't work to prevent a double call either.
+          if (infoWindow.getPosition() !== latlng) {
+
+            var content = ' ' +
+            '<div class="treeInfo">' +
+              '<h4>' + data.common_nam + '</h4>' +
+              '<small>' + data.scientific + '</small>' +
+              '<dl class="dl-horizontal">' +
+                '<dt>Height</dt><dd>' + data.height + 'ft</dd>' +
+                '<dt>Diameter</dt><dd>' + data.diameter + 'ft</dd>' +
+                '<dt>Circumference</dt><dd>' + data.circumfere + 'ft</dd>' +
+                '<dt>Spread</dt><dd>' + data.spread + 'ft</dd>' +
+                '<dt>Year Added</dt><dd>' + data.year + '</dd>' +
+                '<dt>Address</dt><dd>' + data.address + '</dd>' +
+              '</dl>' +
+            '</div>';
+            
+            infoWindow.setPosition(latlng);
+            infoWindow.setContent(content);
+            infoWindow.open(map);
+          }
+        }
       });
     } else if (treesLayer.options.query !== newQuery) {
       // A different neighborhood has been selected. Use the new query.
@@ -112,6 +162,9 @@ function MapService() {
   }
   
   function hideTrees() {
+    if (infoWindow) {
+      infoWindow.close();
+    }
     if (treesLayer) {
       treesLayer.setMap(null);
     }
@@ -143,6 +196,8 @@ function MapService() {
         mapTypeControl: false
       };
       map = new google.maps.Map(document.getElementById(mapDivId), mapOptions);
+      infoWindow = new google.maps.InfoWindow();
+      
       // Alter base layer styles.
       map.setOptions({styles: [
         {
@@ -205,6 +260,14 @@ function MapService() {
       hideAllNeighborhoodsLayer();
       showSingleNeighborhoodLayer(neighborhood.id);
       showTreesInNeighborhood(neighborhood.id);
+    },
+    
+    // A callback that takes a neighborhood cartodb_id as its only parameter.
+    // Called when a neighborhood map feature is clicked.
+    setSelectNeighborhoodCallback: function (callback) { 
+      if (typeof callback === 'function') {
+        selectNeighborhood = callback;
+      }
     }
 
   };
