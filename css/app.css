@@ -3,7 +3,6 @@ div.navbar {
 }
 .brand {
   white-space:nowrap;
-  margin-bottom: 0px;
 }
 .brand>img {
   margin-bottom: 6px;
@@ -19,7 +18,7 @@ a:focus,.btn:focus{
 #main-container {
   width: 100%;
   position: absolute;
-  top: 47px;
+  top: 41px;
   bottom: 0;
 }
 #sidebar {
@@ -43,6 +42,23 @@ a:focus,.btn:focus{
   height:100%; 
   overflow-y: scroll;
 } 
+/* Prompt */
+#neighborhood-list-pane > div.prompt {
+  height: 54px;
+  margin-bottom: 0;
+  position: relative;
+  background-color: #303745;
+}
+#neighborhood-list-pane > div.prompt > p {
+  width: 100%;
+  color: #ddd;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  
+}
+
 /* Search Box  */
 #neighborhood-list-pane > .form-search {
   height: 54px;
@@ -75,6 +91,9 @@ a:focus,.btn:focus{
   opacity: 0.7;
 }
 /* End Search Box  */
+#neighborhood-list > ul {
+  margin-bottom: 0;
+}
 li.neighborhood {
   color: #edeff2;
   padding: 12px 9px;
@@ -84,24 +103,23 @@ li.neighborhood {
   border-right: 1px solid #4f515d;
   cursor: pointer;
 }
-li.neighborhood:last-child {
-  margin-bottom: 54px;
-}
 .no-touch li.neighborhood:hover,
 .no-touch li.neighborhood:active,
 li.neighborhood.selected-true  {
   background-color: #17181b;
-  border-color: #2a2c33;
+  border-top-color: #17181b; 
+  border-bottom-color: #2a2c33;
 }
-
+/*
+li.neighborhood:last-child {
+  margin-bottom: 54px;
+}
+*/
 
 
 /**
  * Neighborhood Details
  */
-#neighborhood-details-pane {
-/*   background-color: #3f414b; */
-}
 #neighborhood-details-pane .container-fluid {
   padding: 15px;
 }
